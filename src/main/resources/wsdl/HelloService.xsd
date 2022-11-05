@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- Very simple xsd, but we want at least one "complex" object and not only primitives, hence the separation of first and last name. -->
+<!-- The response is a String, in order to demonstrate a particular issue with primitive response objects. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="https://soap.home.erzi.ch/services">
+    <xs:element name="helloRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lastName" type="xs:string"/>
+                <xs:element name="firstName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="helloResponse" type="xs:string"/>
+</xs:schema>
