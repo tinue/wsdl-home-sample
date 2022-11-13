@@ -87,10 +87,14 @@ The wsdl file can be retrieved with `curl`:
 The `--insecure` part is only required if the certificate from the server is invalid (e.g. self signed,
 or it does not contain `localhost` in the list of subject alternate names).
 
-To do
+### Build the client library
+The recommended tool for generating client classes is `jaxws-maven-plugin`. The later versions have
+the strange group id `com.sun.xml.ws`, but they generate `jakarta.*` classes nevertheless.
 
 ## Links
 * [jaxb2-maven-plugin, Maven central](https://mvnrepository.com/artifact/org.codehaus.mojo/jaxb2-maven-plugin)
 * [jaxb2-maven-plugin, source](https://github.com/mojohaus/jaxb2-maven-plugin)
 * [xjc, Maven central](https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-xjc)
 * [xjc, source](https://github.com/eclipse-ee4j/jaxb-ri)
+* [jaxws-maven-plugin, Maven central](https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-maven-plugin)
+* [jaxws-maven-plugin, Github](https://github.com/eclipse-ee4j/metro-jax-ws/tree/master/jaxws-ri/extras/jaxws-maven-plugin)

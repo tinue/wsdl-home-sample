@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="https://soap.home.erzi.ch/services" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="https://soap.home.erzi.ch/services" targetNamespace="https://soap.home.erzi.ch/services">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://soap.home.erzi.ch/services">
+    <xs:element name="helloRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="lastName" type="xs:string"/>
+                <xs:element name="firstName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="helloResponse" type="xs:string"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="helloResponse">
+    <wsdl:part element="tns:helloResponse" name="helloResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="helloRequest">
+    <wsdl:part element="tns:helloRequest" name="helloRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HelloPort">
+    <wsdl:operation name="hello">
+      <wsdl:input message="tns:helloRequest" name="helloRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:helloResponse" name="helloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelloPortSoap11" type="tns:HelloPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="hello">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="helloRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelloPortService">
+    <wsdl:port binding="tns:HelloPortSoap11" name="HelloPortSoap11">
+      <soap:address location="https://localhost:443/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

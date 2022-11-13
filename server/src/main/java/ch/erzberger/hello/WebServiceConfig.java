@@ -33,7 +33,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     /**
      * Creates and returns a wsdl definition out of the xsd and detected service methods.
      */
-    @Bean(name = "hello")
+    @Bean(name = "HelloService")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setPortTypeName("HelloPort");
