@@ -47,8 +47,8 @@ two options:
 This project uses the second option.
 
 ### Servlet Runtime
-For the servlet runtime environment, we use Spring Boot v3 (to be released November 24). Version
-3 is used, because it supports the `jakarta.*` namespace.  
+For the servlet runtime environment, we use Spring Boot v3. Version 3 is used, because it supports
+the `jakarta.*` namespace.  
 This is not a Spring Boot tutorial, though. If you need more information there are plenty of resources
 available.
 
