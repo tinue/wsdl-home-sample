@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://soap.home.erzi.ch/services"
+                  xmlns:hello="http://soap.home.erzi.ch/types/hello"
+                  xmlns:ping_1_0="http://soap.home.erzi.ch/types/ping_1_0"
+                  targetNamespace="http://soap.home.erzi.ch/services">
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://soap.home.erzi.ch/types/hello" schemaLocation="HelloService.xsd"/>
+            <import namespace="http://soap.home.erzi.ch/types/ping_1_0" schemaLocation="Ping.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="helloResponse">
+        <wsdl:part element="hello:helloResponse" name="helloResponse"/>
+    </wsdl:message>
+    <wsdl:message name="helloRequest">
+        <wsdl:part element="hello:helloRequest" name="helloRequest"/>
+    </wsdl:message>
+    <wsdl:message name="Ping_1_0_RequestMessage">
+        <wsdl:part element="ping_1_0:PingRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="Ping_1_0_ResponseMessage">
+        <wsdl:part element="ping_1_0:PingResponse" name="parameters"/>
+    </wsdl:message>
+    <wsdl:portType name="HelloPort">
+        <wsdl:operation name="hello">
+            <wsdl:input message="tns:helloRequest" name="helloRequest">
+            </wsdl:input>
+            <wsdl:output message="tns:helloResponse" name="helloResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ping_1_0">
+            <wsdl:input message="tns:Ping_1_0_RequestMessage"/>
+            <wsdl:output message="tns:Ping_1_0_ResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="HelloPortSoap11" type="tns:HelloPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="hello">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="helloRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="helloResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ping_1_0">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body parts="parameters" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="parameters" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="HelloPortService">
+        <wsdl:port binding="tns:HelloPortSoap11" name="HelloPortSoap11">
+            <soap:address location="https://localhost:443/services"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
