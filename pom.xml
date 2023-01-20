@@ -19,6 +19,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>19</java.version>
+        <hello-library-version>1.0.0-SNAPSHOT</hello-library-version>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <maven.build.helper.version>3.3.0</maven.build.helper.version>
@@ -34,6 +35,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- The client library itself, to be used by the server and client -->
+            <dependency>
+                <groupId>ch.erzberger.wsdl-sample</groupId>
+                <artifactId>hello-library</artifactId>
+                <version>${hello-library-version}</version>
+            </dependency>
             <!-- Jakarta RI -->
             <dependency>
                 <groupId>jakarta.xml.bind</groupId>

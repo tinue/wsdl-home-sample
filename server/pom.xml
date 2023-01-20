@@ -13,7 +13,7 @@
     <groupId>ch.erzberger.wsdl-sample</groupId>
     <artifactId>server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>hello-server</name>
     <description>Hello WSDL Server sample</description>
 
@@ -21,9 +21,15 @@
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hello-library-version>1.0.0-SNAPSHOT</hello-library-version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>ch.erzberger.wsdl-sample</groupId>
+            <artifactId>hello-library</artifactId>
+            <version>${hello-library-version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web-services</artifactId>
@@ -31,11 +37,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-        </dependency>
-        <!-- Spring boot needs this library to generate WSDL files on the fly -->
-        <dependency>
-            <groupId>wsdl4j</groupId>
-            <artifactId>wsdl4j</artifactId>
         </dependency>
     </dependencies>
 
@@ -49,27 +50,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- Generates Java classes out of XSD -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>xjc</id>
-                        <goals>
-                            <goal>xjc</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <packageName>ch.erzberger.hello.jaxb</packageName>
-                    <outputDirectory>${project.build.directory}/generated-sources/</outputDirectory>
-                    <sources>
-                        <source>${project.basedir}/src/main/resources/wsdl/HelloService.xsd</source>
-                    </sources>
-                </configuration>
-            </plugin>
-            <!-- Generates an executable jar file, to be used in the docker container -->
+             <!-- Generates an executable jar file, to be used in the docker container -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -93,11 +74,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Optional, generates a jar file with all sources -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
             </plugin>
             <!-- Simplify development, copies real certificates, replacing the dummy ones -->
             <plugin>
