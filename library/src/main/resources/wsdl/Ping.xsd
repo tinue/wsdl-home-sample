@@ -21,6 +21,6 @@
             <xs:element name="hostAddress" minOccurs="0" type="ping_1_0:hostAddressType"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="PingRequest" type="ping_1_0:PingRequest"/>
-    <xs:element name="PingResponse" type="ping_1_0:PingResponse"/>
+    <xs:element name="pingRequest" type="ping_1_0:PingRequest"/>
+    <xs:element name="pingResponse" type="ping_1_0:PingResponse"/>
 </xs:schema>

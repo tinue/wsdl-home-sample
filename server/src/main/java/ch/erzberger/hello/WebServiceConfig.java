@@ -9,6 +9,8 @@ import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
+import org.springframework.ws.wsdl.wsdl11.SimpleWsdl11Definition;
+import org.springframework.ws.wsdl.wsdl11.Wsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
@@ -33,21 +35,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     /**
      * Creates and returns a wsdl definition out of the xsd and detected service methods.
      */
-    @Bean(name = "HelloService")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
-        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-        definition.setPortTypeName("HelloPort");
-        definition.setLocationUri("/services");
-        definition.setTargetNamespace("https://soap.home.erzi.ch/services");
-        definition.setSchema(schema);
-        return definition;
-    }
-
-    /**
-     * Loads the xsd file from the classpath (jar file, after everything is built)
-     */
-	@Bean
-	public XsdSchema helloSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("wsdl/HelloService.xsd"));
+    @Bean(name = "helloService")
+    public Wsdl11Definition defaultWsdl11Definition() {
+        SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
+        wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/HelloService.wsdl"));
+        return wsdl11Definition;
     }
 }

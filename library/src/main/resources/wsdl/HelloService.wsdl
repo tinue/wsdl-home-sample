@@ -16,22 +16,20 @@
     <wsdl:message name="helloRequest">
         <wsdl:part element="hello:helloRequest" name="helloRequest"/>
     </wsdl:message>
-    <wsdl:message name="Ping_1_0_RequestMessage">
-        <wsdl:part element="ping_1_0:PingRequest" name="parameters"/>
+    <wsdl:message name="pingRequest">
+        <wsdl:part element="ping_1_0:pingRequest" name="pingRequest"/>
     </wsdl:message>
-    <wsdl:message name="Ping_1_0_ResponseMessage">
-        <wsdl:part element="ping_1_0:PingResponse" name="parameters"/>
+    <wsdl:message name="pingResponse">
+        <wsdl:part element="ping_1_0:pingResponse" name="pingResponse"/>
     </wsdl:message>
     <wsdl:portType name="HelloPort">
         <wsdl:operation name="hello">
-            <wsdl:input message="tns:helloRequest" name="helloRequest">
-            </wsdl:input>
-            <wsdl:output message="tns:helloResponse" name="helloResponse">
-            </wsdl:output>
+            <wsdl:input message="tns:helloRequest" name="helloRequest"/>
+            <wsdl:output message="tns:helloResponse" name="helloResponse"/>
         </wsdl:operation>
         <wsdl:operation name="ping_1_0">
-            <wsdl:input message="tns:Ping_1_0_RequestMessage"/>
-            <wsdl:output message="tns:Ping_1_0_ResponseMessage"/>
+            <wsdl:input message="tns:pingRequest" name="pingRequest"/>
+            <wsdl:output message="tns:pingResponse" name="pingResponse"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="HelloPortSoap11" type="tns:HelloPort">
@@ -47,17 +45,17 @@
         </wsdl:operation>
         <wsdl:operation name="ping_1_0">
             <soap:operation soapAction=""/>
-            <wsdl:input>
-                <soap:body parts="parameters" use="literal"/>
+            <wsdl:input name="pingRequest">
+                <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output>
-                <soap:body parts="parameters" use="literal"/>
+            <wsdl:output name="pingResponse">
+                <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
     <wsdl:service name="HelloPortService">
         <wsdl:port binding="tns:HelloPortSoap11" name="HelloPortSoap11">
-            <soap:address location="https://localhost:443/services"/>
+            <soap:address location="https://localhost:8443/services"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

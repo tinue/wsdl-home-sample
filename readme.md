@@ -23,7 +23,6 @@ There are three modules in this project:
 * Client: A client implementation, calling the server.
 
 ## Library
-
 ### Make Java classes from a WSDL file
 Java classes are produced from WSDL with the tool `wsimport` (through the Maven `jaxws-maven-plugin`).
 Because the entire JAXB implementation is no longer part of the jdk as of Java 11, the tool needs to be acquired 
@@ -40,6 +39,7 @@ Hint: If you have a [Synology](https://www.synology.com), and want to operate a
 [Nexus](https://www.sonatype.com/products/nexus-repository) repository, then check my project
 [Synology Development Server](https://github.com/tinue/synology-docker-services).
 
+## Server
 ### Servlet Runtime
 For the servlet runtime environment, we use Spring Boot v3. Version 3 is used, because it supports
 the `jakarta.*` namespace.  
