@@ -29,6 +29,7 @@
         <maven.assembly.plugin.version>3.4.2</maven.assembly.plugin.version>
         <jaxws.maven.plugin.version>4.0.0</jaxws.maven.plugin.version>
         <jakarta.version>4.0.0</jakarta.version>
+        <jaxws.runtime.version>4.0.1</jaxws.runtime.version>
         <jaxb2.maven.plugin.version>3.1.0</jaxb2.maven.plugin.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
     </properties>
@@ -55,7 +56,7 @@
             <dependency>
                 <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-rt</artifactId>
-                <version>${jakarta.version}</version>
+                <version>${jaxws.runtime.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>

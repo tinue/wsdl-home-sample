@@ -6,7 +6,13 @@
     <xs:element name="helloRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="lastName" type="xs:string"/>
+                <xs:element name="lastName" minOccurs="1" maxOccurs="1" nillable="false">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
                 <xs:element name="firstName" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>

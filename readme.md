@@ -55,7 +55,10 @@ Jakarta EE Reference implementation.
 * Starting with Jakarta EE 10, new features are being introduced.
 
 The application can simply be run locally with `mvn spring-boot:run` (you may need to change
-the port in `application.properties`, though). For a more permanent server, I added a `Dockerfile`. 
+the port in `application.properties`, though). A quick test shows if it is working:
+`curl -k https://localhost:8443/services/helloService.wsdl` should return the wsdl file (without the XSDs).
+
+For a more permanent server, I added a `Dockerfile`. 
 Use your preferred docker environment to start it up. Very brief instructions:  
 * Build the jar: `mvn clean package`
 * Copy the jar file (`hello-1.0-SNAPSHOT.jar`) to the docker build directory
@@ -69,6 +72,12 @@ Notes:
   prompt. If you want to see the output, skip this parameter. In this case you should use a terminal muxer
   such as `tmux`, so that you can reconnect to the session later on.
 * Port `8443` is just an example; Use any port you wish.
+* The ping service initially had the signature `public PingResponse ping10(@RequestPayload PingRequest pingRequest)`,
+  just like the hello service. This worked for curl-based ping requests, but the Java client failed with
+  an error `No adapter for endpoint...`. I never quite understood why this happens. To solve, check the
+  generated ObjectFactory for the service: If it contains a factory for `JAXBElement<YourResponse>`, then
+  you have to wrap the reply, as it is done in the ping service. If this factory is missing, then
+  the wrapper is not necessary, and you can return the reply unwrapped.
 
 ### SSL and certificate handling
 Enabling SSL on the server side is very easy: It simply needs to be defined in the application
@@ -82,15 +91,17 @@ directory is not getting committed to the repo (it is in `.gitignore`). During t
 of this directory is copied to the `target`, and replaces the dummy certificates that are present.
 
 ## Client
-### Fetch the wsdl file
-The wsdl file can be retrieved with `curl`:  
-`curl https://localhost/services/hello.wsdl --output hello.wsdl --insecure`  
-The `--insecure` part is only required if the certificate from the server is invalid (e.g. self signed,
-or it does not contain `localhost` in the list of subject alternate names).
-
-### Build the client library
-The recommended tool for generating client classes is `jaxws-maven-plugin`. The later versions have
-the strange group id `com.sun.xml.ws`, but they generate `jakarta.*` classes nevertheless.
+### Dependencies
+The client needs the generated jax-ws classes and the JAX-WS runtime library.
+### Client implementation
+The client is very simple,
+and mostly explains itself. Some remarks:
+* SSL Server validation will just work, if the certificate that the server uses is valid. It must be
+issued by an issuer that is known by the Java runtime. This means that the issuer needs to be in
+the `cacerts` file of the Java installation.
+* Just for fun, schema validation is enabled. To test, use e.g. a blank last name, or a `null` first name.
+### SSL client authentication
+This part is TODO.
 
 ## Links
 * [jaxb2-maven-plugin, Maven central](https://mvnrepository.com/artifact/org.codehaus.mojo/jaxb2-maven-plugin)
