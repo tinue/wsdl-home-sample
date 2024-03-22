@@ -110,3 +110,4 @@ This part is TODO.
 * [xjc, source](https://github.com/eclipse-ee4j/jaxb-ri)
 * [jaxws-maven-plugin, Maven central](https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-maven-plugin)
 * [jaxws-maven-plugin, Github](https://github.com/eclipse-ee4j/metro-jax-ws/tree/master/jaxws-ri/extras/jaxws-maven-plugin)
+* [jaxws-maven-plugin, Documentation](https://eclipse-ee4j.github.io/metro-jax-ws/jaxws-maven-plugin/)

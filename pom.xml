@@ -18,20 +18,19 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>19</java.version>
+        <java.version>21</java.version>
         <hello-library-version>1.0.0-SNAPSHOT</hello-library-version>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <maven.build.helper.version>3.3.0</maven.build.helper.version>
-        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
-        <maven.resources.plugin.version>3.3.0</maven.resources.plugin.version>
-        <maven.enforcer.plugin.version>3.1.0</maven.enforcer.plugin.version>
-        <maven.assembly.plugin.version>3.4.2</maven.assembly.plugin.version>
-        <jaxws.maven.plugin.version>4.0.0</jaxws.maven.plugin.version>
-        <jakarta.version>4.0.0</jakarta.version>
-        <jaxws.runtime.version>4.0.1</jaxws.runtime.version>
+        <maven.build.helper.version>3.5.0</maven.build.helper.version>
+        <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
+        <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+        <maven.enforcer.plugin.version>3.4.1</maven.enforcer.plugin.version>
+        <maven.assembly.plugin.version>3.7.1</maven.assembly.plugin.version>
+        <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+        <jaxws.maven.plugin.version>4.0.2</jaxws.maven.plugin.version>
+        <jakarta.version>4.0.1</jakarta.version>
+        <jaxws.runtime.version>4.0.2</jaxws.runtime.version>
         <jaxb2.maven.plugin.version>3.1.0</jaxb2.maven.plugin.version>
-        <junit-jupiter.version>5.9.2</junit-jupiter.version>
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
     </properties>
 
     <dependencyManagement>
@@ -85,6 +84,9 @@
                                     <requireMavenVersion>
                                         <version>3.8.1</version>
                                     </requireMavenVersion>
+                                    <requireJavaVersion>
+                                        <version>21</version>
+                                    </requireJavaVersion>
                                 </rules>
                             </configuration>
                         </execution>
@@ -120,7 +122,21 @@
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven.resources.plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <release>21</release>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 </project>
